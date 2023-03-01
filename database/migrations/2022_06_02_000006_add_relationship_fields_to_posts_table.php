@@ -8,10 +8,10 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->unsignedBigInteger('post_id')->nullable();
-            $table->foreign('post_id', 'post__id_fk_6685127')->references('id')->on('users');
-        });
+        // Schema::table('posts', function (Blueprint $table) {
+        //     $table->unsignedBigInteger('post_id')->nullable();
+        //     $table->foreign('post_id', 'post__id_fk_6685127')->references('id')->on('users');
+        // });
     }
 
     /**
@@ -21,6 +21,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+       // Schema::dropIfExists('posts');
     }
 };

@@ -1,83 +1,80 @@
-      <nav class="navbar navbar-light navbar-expand-md fixed-top" style="background: rgb(57,138,185);">
+    <nav class="navbar navbar-light navbar-expand-md fixed-top navbar">
         <div class="container">
-          <a class="navbar-brand" href="{{('/')}}">
-            SharingApp
-          </a>
-          <button data-bs-toggle="collapse" class="navbar-toggler rounded-0 border-0" data-bs-target="#navcol-1">
-            <span class="visually-hidden">Toggle navigation</span>
-            <span class="navbar-toggler-icon"></span>
-          </button>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <form method="post" target="_blank" enctype="application/x-www-form-urlencoded">
-                            <div class="input-group">
-                              <input class="form-control form-control-sm border-0 rounded-0" type="search" name="search" placeholder="Search user" required="">
-                              <button class="btn btn-primary btn-sm border-0 rounded-0" type="submit">
-                                <i class="fas fa-search"></i>
-                              </button>
+            <a class="navbar-brand" href="{{('/')}}">
+                SharingApp
+            </a>
+            <button 
+                data-bs-toggle="collapse" 
+                class="navbar-toggler rounded-0 border-0" 
+                data-bs-target="#navcol">
+                <span class="visually-hidden">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navcol">
+          
+                @if (Route::has('login'))
+ 
+                <ul class="navbar-nav ms-auto ps-3">
+
+                    @auth 
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('user.dashboard')}}">
+                                <i class="fas fa-home text-white" style="font-size: 18px;"></i>
+                                home
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('user.posts.create')}}">
+                                <i class="fas fa-upload text-white" style="font-size: 18px;"></i>
+                            </a>
+                        </li>
+                       
+                        <!-- Account -->
+                        <li class="nav-item dropdown pe-3">
+                            <a class="nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">
+                                {{ Auth::user()->name }}
+                            </a>
+                            <div class="dropdown-menu mt-3">
+
+                                @if(file_exists(app_path('Http/Controllers/User/SettingController.php')))
+                                <a class="dropdown-item" href="{{ route('user.settings.index') }}">
+                                    <i class="fas fa-cog"></i>
+                                    Settings
+                                </a>
+                                @endif
+ 
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                    <i class="fas fa-lock"></i>
+                                    {{ __('Logout') }}
+                                </a>
+                                <form 
+                                    id="logout-form" 
+                                    action="{{ route('logout') }}" 
+                                    method="POST" 
+                                    style="display: none;">
+                                        @csrf
+                                </form>
                             </div>
-                        </form>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ms-auto">
-                  @auth
-                  @if (Route::has('login'))
-                    <li class="nav-item">
-                      <a class="nav-link active" href="{{('/home')}}">
-                        <i class="fas fa-home"></i>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link active" href=" {{('posts.create')}}">
-                        <i class="fas fa-upload"></i>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="profile/edit.html">
-                        <i class="fas fa-bell"></i>
-                      </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                      <a class="nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">
-                        {{ Auth::user()->name }}
-                      </a>
-                        <div class="dropdown-menu">
-                          <a class="dropdown-item" href="privacy.html">
-                            <i class="fas fa-edit"></i>
-                            EditProfile
-                          </a>
-                          <a class="dropdown-item" href="#">
-                            <i class="fas fa-cog"></i>
-                            Settings
-                          </a>
-                          
-                          <a class="dropdown-item" href="{{route('logout')}}"
-                            onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
-                            <i class="fas fa-lock"></i>
-                            Logout
-                          </a>
-                          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                          </form>
-                          
-                        </div>
-                    </li>
+                        </li>
                     
-                  
-                  @endauth
-                    
-                    @else
-                    <li class="nav-item">
-                      <a class="nav-link" href="{{asset('/login')}}">
-                        Login
-                      </a>
-                    </li>
-                  @endif
+                   
+                        <!-- Login -->
+                        @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('login')}}">
+                                Login
+                            </a>
+                        </li>
+                    @endauth
                 </ul>
+                
+                @endif   
+               
+           
             </div>
         </div>
-      </nav>
+    </nav>
     <!--End Navbar Comment-->
-

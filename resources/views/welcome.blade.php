@@ -1,144 +1,40 @@
 @extends('layouts.app')
-
-@section('title', 'Homepage')
-
+@section('title','Welcome')
 @section('content')
-    <div>
-        @include('layouts.nav')
-    </div>
-    <!--End Navbar Comment-->
-
-    <main class="main">
         <div class="container mt-5">
-            <div class="row g-0 justify-content-center">
+            <div class="row gy-3 justify-content-center">
                 <div class="col-md-7">
-                    <div class="d-flex justify-content-center border border-1 p-2" style="margin-top:2em;margin-bottom:2em;">
-                        <div>
-                            <h1>welcome info vieo</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-                                tempor incididunt ut labore et dolore magna aliqua.<br>
-                            </p>
-                            
-                            <ul class="list-inline">
-                                <li class="list-inline-item">
-                                    Item 1
-                                </li>
-                                <li class="list-inline-item">
-                                    Item 2
-                                </li>
-                                <li class="list-inline-item">
-                                    Item 3
-                                </li>
-                                <li class="list-inline-item">
-                                    Item 4
-                                </li>
-                            </ul>
-                            <video class="bg-info" width="100%" height="400" autoplay="">
-
-                            </video>
-                            <div class="d-flex border border-1 p-1">
-                                <div class="p-1">
-                                    <img class="rounded-circle" src="{{asset('img/img6.jpg')}}" width="30" height="30">
-                                    <a class="text-decoration-none ms-1" href="#">
-                                        John doe
-                                    </a>
-                                </div>
-                                <div class="ms-auto p-1">
-                                    <a class="text-uppercase text-decoration-none btn btn-primary rounded-pill" href="#">
-                                        <strong>Follow</strong>
-                                    </a>
-                                </div>
-                            </div>
+                @foreach($posts as $post)
+                    <div class="border border-1 shadow-sm my-4 px-3 mx-2">
+                    
+                        <div class="px-0 mx-2 my-2">
+                            <video class="bg-info" width="100%" height="400" autoplay=""></video>
+                            <p class="px-1 py-4 card-text">
+                                {{ $post->description }}
+                            </p> 
+                            <a class="fs-6 text-decoration-none ms-1" 
+                                href="{{ route('user.posts.show', ['post' => $post]) }}">
+                                <strong>
+                                    {{ optional($post->user)->username ?? 'No author found' }}
+                                </strong>
+                              
+                            </a>
                         </div>
-
-                        <!-- Start Pop Up -->
-                        <div class="d-flex flex-column">
+                        <!-- popup modal -->
+                        <div class="d-flex flex-row">
                             <span class="p-2">
                                 <i class="fas fa-heart" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="right" title="23.3k"></i>
                             </span>
                             <span class="p-2">
-                                <i class="fas fa-comment" data-bs-toggle="modal" data-bss-tooltip="" data-bs-placement="right" title="23.3k" data-bs-target="#commentModal"></i>
+                                <a href="{{ route('user.posts.show', ['post' => $post]) }}">
+                                    <i class="fas fa-comment" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="right" title="23.3k"></i>
+                                </a>
                             </span>
-
-                            <!-- Start Post Comment Section -->
-                            <div id="commentModal" class="modal">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">
-                                                Post Comment
-                                            </h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            
-                                            <!-- Comment loop -->
-                                            <ul class="list-unstyled overflow-auto" style="height: 300px;">
-                                                <li class="mb-2 list-group-item d-flex justify-content-between align-items-center">
-                                                    <span>
-                                                        <img class="rounded-circle" src="{{asset('img/img6.jpg')}}" width="50" height="50">
-                                                    </span>    
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do .
-                                                </li>
-                                            </ul>
-                                            <!-- End Comment loop -->
-                                            <form method="post">
-                                                <div class="input-group">
-                                                    <input class="form-control form-control-sm rounded-0" type="text" name="body" placeholder="Post comment" required="">
-                                                    <button class="bg-primary btn btn-sm rounded-0 border border-1" type="submit">
-                                                        Post
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Post Comment Section -->
-                            
-                            <!-- Start Report Section -->
-                            <span class="p-2">
-                                <i class="fas fa-flag" data-bs-toggle="modal" data-bs-target="#flagModal"></i>
-                            </span>
-
-                            <div id="flagModal" class="modal">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">
-                                                Report
-                                            </h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form>
-                                                <select class="form-select">
-                                                    <optgroup label="This is a group">
-                                                        <option value="12" selected="">
-                                                            This is item 1
-                                                        </option>
-                                                        <option value="13">
-                                                            This is item 2
-                                                        </option>
-                                                        <option value="14">
-                                                            This is item 3
-                                                        </option>
-                                                    </optgroup>
-                                                </select>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Report Section -->
-
-
-
-                        <!-- End Pop Up -->
+                           
+                        </div>
                     </div>
+                @endforeach
                 </div>
             </div>
         </div>
-    </main>
-   
-    
-@endsection
+@endsection	

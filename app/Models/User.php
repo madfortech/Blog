@@ -1,38 +1,55 @@
 <?php
 
 namespace App\Models;
-
-use Carbon\Carbon;
-use DateTimeInterface;
+// use DateTimeInterface;
 use Hash;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia, MustVerifyEmail
 {
-    use SoftDeletes;
+    
+    
     use Notifiable;
     use HasFactory;
+    use HasRoles;
+    use InteractsWithMedia;
 
     protected $table = 'users';
 
+    protected $appends = [
+        'avatar',
+    ];
+
+  
+    
     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
-     */
+    */
+
+    public function isAdmin()
+    {
+        return $this->hasRole('admin') || $this->hasPermissionTo('manage users');
+    }
+
     protected $fillable = [
+        
         'name',
+        'username',
         'email',
         'email_verified_at',
         'password',
         'remember_token',
         'created_at',
         'updated_at',
-        'deleted_at',
     ];
 
     /**
@@ -49,7 +66,6 @@ class User extends Authenticatable
         'email_verified_at',
         'created_at',
         'updated_at',
-        'deleted_at',
     ];
 
     /**
@@ -58,7 +74,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at' => 'date:Y-m-d',
     ];
 
     /**
@@ -66,21 +82,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    public function getIsAdminAttribute()
-    {
-        return $this->roles()->where('id', 1)->exists();
-    }
-
-    public function getEmailVerifiedAtAttribute($value)
-    {
-        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format').' '.config('panel.time_format')) : null;
-    }
-
-    public function setEmailVerifiedAtAttribute($value)
-    {
-        $this->attributes['email_verified_at'] = $value ? Carbon::createFromFormat(config('panel.date_format').' '.config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
-    }
-
+  
     public function setPasswordAttribute($input)
     {
         if ($input) {
@@ -93,13 +95,13 @@ class User extends Authenticatable
         $this->notify(new ResetPassword($token));
     }
 
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
 
-    protected function serializeDate(DateTimeInterface $date)
-    {
-        return $date->format('Y-m-d H:i:s');
-    }
+    // protected function serializeDate(DateTimeInterface $date)
+    // {
+    //     return $date->format('Y-m-d H:i:s');
+    // }
+
+
+    
+  
 }

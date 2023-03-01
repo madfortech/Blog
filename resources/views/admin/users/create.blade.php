@@ -1,63 +1,137 @@
 @extends('layouts.admin')
 @section('content')
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.create') }} {{ trans('cruds.user.title_singular') }}
-    </div>
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Create User</h3>
+    <div class="row">
+        <div class="col">
+            <div class="card shadow mb-3">
+                <div class="card-header py-3">
+                    <p class="text-primary m-0 fw-bold">Create User</p>
+                    <div class="card-body">
+                        <form method="POST" 
+                            action="{{ route("admin.users.store") }}" 
+                            enctype="multipart/form-data">
+                            @csrf
+                            <div class="row gx-1 gy-1">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="username">
+                                            <strong>
+                                                {{('username')}}
+                                            </strong>
+                                        </label>
+                                        <input 
+                                        class="form-control form-control-sm rounded-0 {{ $errors->has('username') ? 'is-invalid' : '' }}" 
+                                        type="text" name="username" id="username" 
+                                        value="{{ old('username', '') }}"
+                                        placeholder="username" 
+                                        required>
+                                        @if($errors->has('username'))
+                                            <span class="text-danger">
+                                                {{ $errors->first('name') }}
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- username -->
 
-    <div class="card-body">
-        <form method="POST" action="{{ route("admin.users.store") }}" enctype="multipart/form-data">
-            @csrf
-            <div class="form-group">
-                <label class="required" for="name">{{ trans('cruds.user.fields.name') }}</label>
-                <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', '') }}" required>
-                @if($errors->has('name'))
-                    <span class="text-danger">{{ $errors->first('name') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.user.fields.name_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label class="required" for="email">{{ trans('cruds.user.fields.email') }}</label>
-                <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="email" name="email" id="email" value="{{ old('email') }}" required>
-                @if($errors->has('email'))
-                    <span class="text-danger">{{ $errors->first('email') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.user.fields.email_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label class="required" for="password">{{ trans('cruds.user.fields.password') }}</label>
-                <input class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" type="password" name="password" id="password" required>
-                @if($errors->has('password'))
-                    <span class="text-danger">{{ $errors->first('password') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.user.fields.password_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label class="required" for="roles">{{ trans('cruds.user.fields.roles') }}</label>
-                <div style="padding-bottom: 4px">
-                    <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
-                    <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                            <div class="row gx-1 gy-1">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="name">
+                                            <strong>
+                                                {{('name')}}
+                                            </strong>
+                                        </label>
+                                        <input 
+                                        class="form-control form-control-sm rounded-0 {{ $errors->has('name') ? 'is-invalid' : '' }}" 
+                                        type="text" name="name" id="name" 
+                                        value="{{ old('name', '') }}"
+                                        placeholder="john doe" 
+                                        required>
+                                        @if($errors->has('name'))
+                                            <span class="text-danger">
+                                                {{ $errors->first('name') }}
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- name -->
+
+                            <div class="row gx-1 gy-1">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="email">
+                                            <strong>
+                                                {{('email')}}
+                                            </strong>
+                                        </label>
+                                        <input 
+                                        class="form-control form-control-sm rounded-0 
+                                        {{ $errors->has('email') ? 'is-invalid' : '' }}" 
+                                        type="email" name="email" id="email" 
+                                        value="{{ old('email', '') }}" 
+                                        placeholder="mail@example.com" 
+                                        required>
+                                        @if($errors->has('email'))
+                                            <span class="text-danger">
+                                                {{ $errors->first('email') }}
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- email -->
+
+                            <div class="row gx-1 gy-1">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="password">
+                                            <strong>
+                                                {{('password')}}
+                                            </strong>
+                                        </label>
+                                        <input 
+                                        class="form-control form-control-sm rounded-0 
+                                        {{ $errors->has('password') ? 'is-invalid' : '' }}" 
+                                        type="password" name="password" id="password" 
+                                        placeholder="password" 
+                                        required>
+                                        @if($errors->has('password'))
+                                            <span class="text-danger">
+                                                {{ $errors->first('password') }}
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- password -->
+ 
+
+                            <div class="mb-3">
+                                <button class="btn btn-primary btn-sm rounded-0 border-0" 
+                                    type="submit">
+                                    <i class="fas fa-plus"></i>&nbsp;
+                                    create
+                                </button>
+                            </div>
+                            <!-- button -->
+                        </form>
+                    </div>
                 </div>
-                <select class="form-control select2 {{ $errors->has('roles') ? 'is-invalid' : '' }}" name="roles[]" id="roles" multiple required>
-                    @foreach($roles as $id => $role)
-                        <option value="{{ $id }}" {{ in_array($id, old('roles', [])) ? 'selected' : '' }}>{{ $role }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('roles'))
-                    <span class="text-danger">{{ $errors->first('roles') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.user.fields.roles_helper') }}</span>
             </div>
-            <div class="form-group">
-                <button class="btn btn-danger" type="submit">
-                    {{ trans('global.save') }}
-                </button>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
 
+
+
+ 
+        
+     
 
 @endsection
