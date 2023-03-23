@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="{{asset('fonts/fontawesome-all.min.css')}}">
     <link rel="stylesheet" href="{{asset('styles/css/styles.min.css')}}">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
 
 <body id="page-top">
@@ -47,6 +47,7 @@
             <i class="fas fa-angle-up"></i>
         </a>
     </div>
+<script src="{{ mix('js/app.js') }}" defer></script>
 <script src="{{asset('styles/js/jquery.min.js')}}"></script>
 <script src="{{asset('styles/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('styles/js/script.min.js')}}"></script>

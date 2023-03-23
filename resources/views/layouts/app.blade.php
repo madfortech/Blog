@@ -23,7 +23,7 @@
         <link rel="stylesheet" href="{{asset('css/styles.min.css')}}">
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
     </head>
     <body>
@@ -31,6 +31,7 @@
         <main class="main py-5">     
             @yield('content')
         </main>
+        <script src="{{ mix('js/app.js') }}" defer></script>
         <script src="{{asset('js/jquery.min.js')}}"></script>
         <script src="{{asset('js/bootstrap.min.js')}}"></script>
         <script src="{{asset('js/script.min.js')}}"></script>
