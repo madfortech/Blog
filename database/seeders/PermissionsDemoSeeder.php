@@ -14,51 +14,18 @@ class PermissionsDemoSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         // create permissions
-        Permission::create(['name' => 'view users']);
-        Permission::create(['name' => 'create article']);
-        Permission::create(['name' => 'delete article']);
-        Permission::create(['name' => 'manage users']);
-        Permission::create(['name' => 'view user report']);
-        
-        // create roles and assign existing permissions
-        $role1 = Role::create(['name' => 'moderator']);
-        $role1->givePermissionTo('view users');
-        $role1->givePermissionTo('view user report');
-
-         // create roles and assign existing permissions
-         $role2 = Role::create(['name' => 'writer']);
-         $role2->givePermissionTo('create article');
-
-        
-        // create user
-        $role1 = Role::create(['name' => 'user']);
-
-        $user = \App\Models\User::factory()->create([
-            'name' => 'user',
-            'username' => 'user',
-            'email' => 'user@example.com',
-            'password' => '12345678',
-        ]);
-        $user->assignRole($role1);
-
-        // Create writeer
-        $user = \App\Models\User::factory()->create([
-            'name' => 'writer',
-            'username' => 'writer',
-            'email' => 'writer@example.com',
-            'password' => '12345678',
-        ]);
-        $user->assignRole($role2);
-        
+        Permission::create(['name' => 'create posts']);
+        Permission::create(['name' => 'delete posts']);
+        Permission::create(['name' => 'edit posts']);
+     
         //create super admin 
-        $role3 = Role::create(['name' => 'Super-Admin']);
+        $role1 = Role::create(['name' => 'Super-Admin']);
         $user = \App\Models\User::factory()->create([
            
             'name' => 'super-admin',
-            'username' => 'superadmin',
             'email' => 'superadmin@example.com',
             'password' => 'password',
         ])->givePermissionTo(Permission::all());
-        $user->assignRole($role3);
+        $user->assignRole($role1);
     }
 }

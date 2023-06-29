@@ -2,16 +2,11 @@
 
 namespace App\Http\Requests;
 
-use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePostRequest extends FormRequest
 {
-    // public function authorize()
-    // {
-    //     return Gate::allows('post_create');
-    // }
-
+   
     public function rules()
     {
         return [
@@ -20,6 +15,8 @@ class StorePostRequest extends FormRequest
             ],
             'avatar' => [
                 'required',
+                'mimetypes:audio/mpeg,audio/ogg,audio/wav', // specify allowed audio file types
+                'max:5000', // specify maximum file size in kilobytes
             ],
         ];
     }

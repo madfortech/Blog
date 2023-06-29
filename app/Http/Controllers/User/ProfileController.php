@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
@@ -19,6 +20,7 @@ class ProfileController extends Controller
         return view('user.profile.edit');
     }
 
+   
     
     /**
      * Update the specified resource in storage.
@@ -31,10 +33,8 @@ class ProfileController extends Controller
     public function update(UpdateProfileRequest $request)
     {
         $user = auth()->user();
-
         $user->update($request->validated());
-
-
+      
         return redirect()
         ->route('user.profile.edit')
         ->with('message', __('update profile successfully'));
@@ -45,11 +45,6 @@ class ProfileController extends Controller
     public function destroy()
     {
         $user = auth()->user();
-
-        $user->update([
-            'email' => time() . '_' . $user->email,
-        ]);
-
         $user->delete();
         return redirect()
         ->route('login')

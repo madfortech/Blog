@@ -7,7 +7,7 @@
                 <div>
                     <div class="px-3 mx-2 text-center">
                         <h1>404 error</h1>
-                        <a class="nav-link text-center" href="{{route('login')}}">
+                        <a class="nav-link text-center" href="{{('/')}}">
                            Go back
                         </a>
                       

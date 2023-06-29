@@ -12,7 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends Authenticatable implements HasMedia, MustVerifyEmail
+class User extends Authenticatable implements HasMedia
 {
     
     
@@ -28,22 +28,16 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     ];
 
   
-    
     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
     */
 
-    public function isAdmin()
-    {
-        return $this->hasRole('admin') || $this->hasPermissionTo('manage users');
-    }
-
+   
     protected $fillable = [
         
         'name',
-        'username',
         'email',
         'email_verified_at',
         'password',

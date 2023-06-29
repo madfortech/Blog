@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>App Name - @yield('title')</title>
-        <meta name="theme-color" content="rgb(52,179,241)">
         <meta name="twitter:description" content="write description here">
         <meta property="og:type" content="website">
         <meta name="twitter:card" content="summary">
@@ -19,7 +18,6 @@
         <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
         <link rel="manifest" href="{{asset('manifest.json')}}">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700&amp;display=swap">
-        <link rel="stylesheet" href="{{asset('fonts/fontawesome-all.min.css')}}">
         <link rel="stylesheet" href="{{asset('css/styles.min.css')}}">
 
         <!-- Scripts -->
@@ -31,7 +29,33 @@
         <main class="main py-5">     
             @yield('content')
         </main>
-        <script src="{{ mix('js/app.js') }}" defer></script>
+
+        <!--Start Footer Comment-->
+        <footer class="footer fixed-bottom">
+            <div class="container">
+                <div class="row g-0">
+                    <div class="col-md-9">
+                        <ul class="list-inline text-capitalize text-light mt-3 text-center text-md-start">
+                            <li class="list-inline-item">
+                                2024 all right reserved
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center text-md-start mt-3">
+                            @auth 
+                            <a class="btn btn-sm text-capitalize" role="button">
+                                {{ Auth::user()->email }}
+                            </a>
+                            @endauth
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!--End Footer Comment-->
+
+        <!-- <script src="{{ mix('js/app.js') }}" defer></script> -->
         <script src="{{asset('js/jquery.min.js')}}"></script>
         <script src="{{asset('js/bootstrap.min.js')}}"></script>
         <script src="{{asset('js/script.min.js')}}"></script>

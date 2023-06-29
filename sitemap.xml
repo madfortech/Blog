@@ -1,49 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset 
-    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
-    http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
-        <loc>https://www.example.com/Admin-panel/users/</loc>
+        <loc>/Auth/edit.html</loc>
     </url>
     <url>
-        <loc>https://www.example.com/Admin-panel/dashboard.html</loc>
+        <loc>/Auth/login.html</loc>
     </url>
     <url>
-        <loc>https://www.example.com/Auth/login.html</loc>
+        <loc>/Auth/register.html</loc>
     </url>
     <url>
-        <loc>https://www.example.com/Auth/register.html</loc>
+        <loc>/Auth/reset-password.html</loc>
     </url>
     <url>
-        <loc>https://www.example.com/Auth/reset-password.html</loc>
+        <loc>/posts/create.html</loc>
     </url>
     <url>
-        <loc>https://www.example.com/Post/create.html</loc>
+        <loc>/posts/</loc>
     </url>
     <url>
-        <loc>https://www.example.com/profile/edit.html</loc>
+        <loc>/posts/show.html</loc>
     </url>
     <url>
-        <loc>https://www.example.com/settings/activity.html</loc>
+        <loc>/profile/edit.html</loc>
     </url>
     <url>
-        <loc>https://www.example.com/settings/change-password.html</loc>
+        <loc>/settings/activity.html</loc>
     </url>
     <url>
-        <loc>https://www.example.com/settings/settings.html</loc>
+        <loc>/settings/settings.html</loc>
     </url>
     <url>
-        <loc>https://www.example.com/home.html</loc>
+        <loc>/home.html</loc>
     </url>
     <url>
-        <loc>https://www.example.com/</loc>
+        <loc>/</loc>
     </url>
     <url>
-        <loc>https://www.example.com/notifications.html</loc>
-    </url>
-    <url>
-        <loc>https://www.example.com/privacy.html</loc>
+        <loc>/privacy.html</loc>
     </url>
 </urlset>
