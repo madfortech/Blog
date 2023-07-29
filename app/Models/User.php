@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Models;
-// use DateTimeInterface;
-use Hash;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,7 +10,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends Authenticatable implements HasMedia
+class User extends Authenticatable implements HasMedia, MustVerifyEmail
 {
     
     
@@ -77,25 +75,9 @@ class User extends Authenticatable implements HasMedia
      * @var array
      */
   
-    public function setPasswordAttribute($input)
-    {
-        if ($input) {
-            $this->attributes['password'] = app('hash')->needsRehash($input) ? Hash::make($input) : $input;
-        }
-    }
-
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPassword($token));
     }
-
-
-    // protected function serializeDate(DateTimeInterface $date)
-    // {
-    //     return $date->format('Y-m-d H:i:s');
-    // }
-
-
-    
   
 }

@@ -2,62 +2,35 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>App Name - @yield('title')</title>
-        <meta name="twitter:description" content="write description here">
-        <meta property="og:type" content="website">
-        <meta name="twitter:card" content="summary">
-        <meta property="og:title" content="VideoApp">
-        <meta name="Description" content="best social app">
-        <meta name="Keywords" content="social app , sharing post">
-        <meta name="Author" content="Himanshu Nishad">
-        <meta name="twitter:title" content="VideoApp">
-        <meta property="og:description" content="write description here">
-        <meta name="description" content="write description here">
-        <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-        <link rel="manifest" href="{{asset('manifest.json')}}">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700&amp;display=swap">
-        <link rel="stylesheet" href="{{asset('css/styles.min.css')}}">
+
+        <title>{{ config('app.name', 'Laravel') }}</title>
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body>
-        @include('layouts.nav')
-        <main class="main py-5">     
-            @yield('content')
-        </main>
+    <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100">
+            @include('layouts.navigation')
 
-        <!--Start Footer Comment-->
-        <footer class="footer fixed-bottom">
-            <div class="container">
-                <div class="row g-0">
-                    <div class="col-md-9">
-                        <ul class="list-inline text-capitalize text-light mt-3 text-center text-md-start">
-                            <li class="list-inline-item">
-                                2024 all right reserved
-                            </li>
-                        </ul>
+            <!-- Page Heading -->
+            @if (isset($header))
+                <header class="bg-white shadow">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
                     </div>
-                    <div class="col-md-3">
-                        <div class="text-center text-md-start mt-3">
-                            @auth 
-                            <a class="btn btn-sm text-capitalize" role="button">
-                                {{ Auth::user()->email }}
-                            </a>
-                            @endauth
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!--End Footer Comment-->
+                </header>
+            @endif
 
-        <!-- <script src="{{ mix('js/app.js') }}" defer></script> -->
-        <script src="{{asset('js/jquery.min.js')}}"></script>
-        <script src="{{asset('js/bootstrap.min.js')}}"></script>
-        <script src="{{asset('js/script.min.js')}}"></script>
+            <!-- Page Content -->
+            <main>
+                {{ $slot }}
+            </main>
+        </div>
     </body>
 </html>

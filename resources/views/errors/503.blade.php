@@ -1,20 +1,21 @@
 @extends('errors::minimal')
 @section('title', __('Service Unavailable'))
 @section('message')
-        <div class="container mt-5">
-            <div>
-                <div>
-                    <div class="px-3 mx-2 text-center">
-                        
-                        <h1>503 error</h1>
+<div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-purple-700 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900">
+                        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                            503 Service Unavailable
+                        </h2>
+     
 
                         <a class="nav-link" href="{{('/')}}">
-                           Go back
+                            Go back
                         </a>
-                      
                     </div>
-                   
                 </div>
             </div>
         </div>
+
 @endsection
