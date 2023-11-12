@@ -6,7 +6,6 @@
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-import _ from 'lodash';
 window._ = _;
 
 import axios from 'axios';
