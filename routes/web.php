@@ -1,5 +1,6 @@
 <?php
-
+use App\Http\Controllers\Admin\AdminController;  
+use App\Http\Controllers\User\DashBordController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,21 +19,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Admin Dashboard
+Route::get('/admin/home', [AdminController::class, 'index'])
+->middleware(['auth', 'verified','role:super-admin'])->name('admin.dashboard');
 
-Route::group(['middleware' => ['auth','role:super-admin']], function () {
-    Route::get('/admin', function () {
-        return view('admin.home');
-    })->name('admin.dashboard');
-    
-});
-
-Route::group(['middleware' => ['auth']], function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->middleware(['auth'])->name('user.dashboard');
-    
-});
-
+// User Dashboard
+Route::get('/user/home', [DashBordController::class, 'index'])
+->middleware(['auth'])->name('user.dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
